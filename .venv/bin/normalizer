@@ -1,0 +1,6 @@
+#!/home/kongali1720/projects/SWIFT-Payment-Messaging-Chainlink-Oracle-Blockchain-Settlement/.venv/bin/python
+import sys
+from charset_normalizer.cli import cli_detect
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(cli_detect())

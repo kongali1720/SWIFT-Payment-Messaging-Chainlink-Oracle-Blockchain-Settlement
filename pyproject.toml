@@ -1,12 +1,9 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "swift-payment-messaging"
 version = "0.1.0"
 description = "Enterprise SWIFT Payment Messaging Platform"
 requires-python = ">=3.10"
-
-dependencies = [
-    "fastapi",
-    "uvicorn",
-    "pydantic",
-    "requests",
-]

@@ -1,10 +1,4 @@
-"""
-MT103 Processing Engine
-"""
-
-from swift.blocks import SwiftBlockParser
-from swift.extractor import SwiftFieldExtractor
-from swift.parsers import FIELD_PARSERS
+from swift.factory import MessageFactory
 from swift.validator import validate_mt103
 
 
@@ -15,32 +9,17 @@ class MT103:
 
     def process(self):
 
-        block_parser = SwiftBlockParser()
+        message = MessageFactory().build(
+            self.raw_message
+        )
 
-        blocks = block_parser.parse(self.raw_message)
-
-        text_block = blocks.get("4", self.raw_message)
-
-        extractor = SwiftFieldExtractor()
-
-        fields = extractor.extract(text_block)
-
-        parsed = {}
-
-        for tag, value in fields.items():
-
-            parser = FIELD_PARSERS.get(tag)
-
-            if parser:
-                parsed[tag] = parser.parse(value)
-            else:
-                parsed[tag] = value
-
-        validation = validate_mt103(fields)
+        validation = validate_mt103(
+            message.fields
+        )
 
         return {
             "message_type": "MT103",
-            "blocks": blocks,
-            "fields": parsed,
+            "blocks": message.blocks,
+            "fields": message.fields,
             "validation": validation,
         }

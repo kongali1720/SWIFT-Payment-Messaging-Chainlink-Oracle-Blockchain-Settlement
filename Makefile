@@ -2,10 +2,11 @@ run:
 	uvicorn api.app:app --reload
 
 test:
-	pytest
+	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -v
 
 lint:
 	python -m compileall .
 
-format:
-	python -m black .
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete

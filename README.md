@@ -12,7 +12,7 @@
 
 ### SWIFT Payment Messaging + Chainlink Oracle + Blockchain Settlement
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Chainlink_Logo_%28Blue%29.png" width="120"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Chainlink_Logo_%28Blue%29.png" width="300"/>
 
 <br>
 

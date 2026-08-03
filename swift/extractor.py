@@ -1,13 +1,15 @@
 """
-SWIFT Text Block Field Extractor
+SWIFT FIN Text Block Extractor
 
-Extracts fields from Block 4.
+Parses block {4:}
 
-Example:
+Returns:
 
-:20:REF123
-:23B:CRED
-:32A:260803USD1000,
+{
+    "20": "...",
+    "23B": "...",
+    ...
+}
 """
 
 from __future__ import annotations
@@ -15,18 +17,44 @@ from __future__ import annotations
 import re
 
 
-FIELD_PATTERN = re.compile(
-    r":([0-9]{2}[A-Z]?):(.*?)(?=\n:[0-9]{2}[A-Z]?:|\n-$|\Z)",
-    re.DOTALL,
-)
+FIELD_START = re.compile(r"^:([0-9]{2}[A-Z]?):(.*)$")
 
 
 class SwiftFieldExtractor:
 
-    def extract(self, text_block: str) -> dict[str, str]:
-        fields: dict[str, str] = {}
+    def extract(self, text_block: str):
 
-        for tag, value in FIELD_PATTERN.findall(text_block):
-            fields[tag] = value.strip()
+        fields = {}
+
+        current_tag = None
+
+        buffer = []
+
+        for line in text_block.splitlines():
+
+            if line.strip() == "-":
+                break
+
+            match = FIELD_START.match(line)
+
+            if match:
+
+                if current_tag:
+
+                    fields[current_tag] = "\n".join(buffer).strip()
+
+                current_tag = match.group(1)
+
+                buffer = [match.group(2)]
+
+            else:
+
+                if current_tag:
+
+                    buffer.append(line)
+
+        if current_tag:
+
+            fields[current_tag] = "\n".join(buffer).strip()
 
         return fields

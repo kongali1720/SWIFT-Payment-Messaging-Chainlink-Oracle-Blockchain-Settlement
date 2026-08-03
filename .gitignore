@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+
+# Docker
+*.pid
+
+# macOS
+.DS_Store
+
+# Coverage
+htmlcov/
+.coverage
+
+# Build
+dist/
+build/

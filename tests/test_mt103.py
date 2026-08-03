@@ -19,4 +19,12 @@ def test_mt103_basic():
 
     assert result["validation"]["valid"] is True
 
-    assert result["payload"]["20"] == "ABC123"
+    assert result["fields"]["20"] == "ABC123"
+
+    assert result["fields"]["23B"] == "CRED"
+
+    assert result["fields"]["32A"]["currency"] == "USD"
+
+    assert result["fields"]["50K"]["name"] == "JOHN DOE"
+
+    assert result["fields"]["59"]["name"] == "JANE DOE"

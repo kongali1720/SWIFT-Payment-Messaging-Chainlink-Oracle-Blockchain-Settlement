@@ -1,21 +1,18 @@
-REQUIRED_FIELDS = [
-    "20",
-    "23B",
-    "32A",
-    "50K",
-    "59"
-]
+from swift.specs.registry import get_specification
 
 
-def validate_mt103(data: dict):
+def validate_mt103(fields):
+
+    spec = get_specification("103")
 
     missing = []
 
-    for field in REQUIRED_FIELDS:
-        if field not in data:
+    for field in spec.required_fields:
+
+        if field not in fields:
             missing.append(field)
 
     return {
         "valid": len(missing) == 0,
-        "missing": missing
+        "missing": missing,
     }

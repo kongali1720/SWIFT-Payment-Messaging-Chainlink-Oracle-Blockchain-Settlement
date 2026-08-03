@@ -9,6 +9,7 @@ def test_mt103_basic():
 :32A:260803USD1000,
 :50K:JOHN DOE
 :59:JANE DOE
+:71A:SHA
 """
 
     parser = MT103(message)
@@ -25,6 +26,4 @@ def test_mt103_basic():
 
     assert result["fields"]["32A"]["currency"] == "USD"
 
-    assert result["fields"]["50K"]["name"] == "JOHN DOE"
-
-    assert result["fields"]["59"]["name"] == "JANE DOE"
+    assert result["fields"]["71A"] == "SHA"

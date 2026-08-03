@@ -1,0 +1,7 @@
+SWIFT_VERSION = "FIN"
+
+SUPPORTED_MESSAGES = [
+    "MT103",
+    "MT202",
+    "MT940",
+]

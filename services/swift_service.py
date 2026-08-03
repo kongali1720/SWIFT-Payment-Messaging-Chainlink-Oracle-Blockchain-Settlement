@@ -1,6 +1,15 @@
-from swift.mt103 import MT103
+from swift.detector import MessageDetector
+from swift.engines import EngineRegistry
 
 
-def parse_mt103(message: str):
-    engine = MT103(message)
-    return engine.process()
+def parse(message: str):
+
+    detector = MessageDetector()
+
+    message_type = detector.detect(message)
+
+    registry = EngineRegistry()
+
+    engine = registry.get_engine(message_type)
+
+    return engine(message).process()

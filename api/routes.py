@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from api.schemas import SwiftMessageRequest
-from services.swift_service import parse_mt103
+from services.swift_service import parse
 
 router = APIRouter(
     prefix="/api/v1",
@@ -11,12 +11,13 @@ router = APIRouter(
 
 @router.get("/status")
 def status():
+
     return {
-        "service": "SWIFT Engine",
-        "online": True,
+        "status": "running"
     }
 
 
 @router.post("/swift/parse")
-def parse(request: SwiftMessageRequest):
-    return parse_mt103(request.message)
+def parse_swift(request: SwiftMessageRequest):
+
+    return parse(request.message)
